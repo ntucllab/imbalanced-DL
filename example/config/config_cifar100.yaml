@@ -1,0 +1,28 @@
+# dataset name
+dataset: 'cifar100'
+# create imbalanced data
+# select imb_type and imb_factor
+imb_type: 'exp'
+imb_factor: 0.01
+rand_number: 0
+workers: 4
+# model backbone
+backbone: 'resnet32'
+# model classifier
+classifier: 'dot_product_classifier'
+# Training related parameters
+gpu: 0
+start_epoch: 0
+epochs: 300
+batch_size: 128
+optimizer: 'sgd'
+learning_rate: 0.1
+momentum: 0.9
+weight_decay: 2e-4
+# Remix hyper parameter
+k_majority: 3
+tau: 0.5
+# logging related
+print_freq: 10
+root_log: 'log_cifar100'
+root_model: 'checkpoint_cifar100'
