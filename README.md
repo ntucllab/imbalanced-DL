@@ -58,7 +58,7 @@ We highlight three key features of `imbalanced-DL` as the following:
 
 
 ```python
-from imbalanced-DL.dataset.imbalance_dataset import ImbalancedDataset
+from imbalanceddl.dataset.imbalance_dataset import ImbalancedDataset
 
 # specify the dataset name
 imbalance_dataset = ImbalancedDataset(config, dataset_name=config.dataset)
@@ -73,7 +73,7 @@ imbalance_dataset = ImbalancedDataset(config, dataset_name=config.dataset)
 * We provide a `build_trainer()` function to return the specified trainer as the following.
 
 ```python
-from imbalanced-DL.strategy.build_trainer import build_trainer
+from imbalanceddl.strategy.build_trainer import build_trainer
 
 # specify the strategy
 trainer = build_trainer(config,
@@ -91,7 +91,7 @@ trainer.eval_best_model()
 
 
 ```python
-from imbalanced-DL.strategy import LDAMDRWTrainer
+from imbalanceddl.strategy import LDAMDRWTrainer
 
 # pick the trainer
 trainer = LDAMDRWTrainer(config,
