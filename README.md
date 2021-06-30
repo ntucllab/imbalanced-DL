@@ -37,7 +37,7 @@ We provide some baseline strategies as well as some state-of-the-are strategies 
 
 ```
 git clone https://github.com/ntucllab/imbalanced-DL.git
-cd imbalanced-DL
+cd imbalanceddl
 python -m pip install -r requirements.txt
 python setup.py install
 
@@ -53,8 +53,8 @@ We highlight three key features of `imbalanced-DL` as the following:
     * `imb_type`: you can choose from `exp` (long-tailed imbalance) or `step` imbalanced type.
     * `imb_ratio`: you can specify the imbalanceness of your data, typically researchers choose `0.1` or `0.01`.
     * `dataset_name`: you can specify 5 benchmark image datasets we provide, or you can implement your own dataset.
-    * For an example of the `config_file`, you can see [example/config]().
-* To contruct your own dataset, you should inherit from [`BaseDataset`](), and you can follow [`torchvision.datasets.ImageFolder`](https://pytorch.org/vision/stable/_modules/torchvision/datasets/folder.html#ImageFolder) to construct your dataset in PyTorch format.
+    * For an example of the `config_file`, you can see [example/config](https://github.com/ntucllab/imbalanced-DL/blob/main/example/config/config_cifar10.yaml).
+* To contruct your own dataset, you should inherit from [`BaseDataset`](https://github.com/ntucllab/imbalanced-DL/blob/e63acaab958bf206edad9418e9c30352e9566356/imbalanceddl/dataset/dataset_base.py#L4), and you can follow [`torchvision.datasets.ImageFolder`](https://pytorch.org/vision/stable/_modules/torchvision/datasets/folder.html#ImageFolder) to construct your dataset in PyTorch format.
 
 
 ```python
@@ -66,9 +66,9 @@ imbalance_dataset = ImbalancedDataset(config, dataset_name=config.dataset)
 ```
 
 (1) Strategy Trainer:
-* We support 6 different strategies for deep imbalance learning, and you can either choose to train from scratch, or evaluate with the best model after training. To evaluate with the best model, you can get more in-depth metrics such as per class accuracy for further evaluation on the performance of the selected strategy. We provide one trained model in [example/checkpoint_cifar10]().
+* We support 6 different strategies for deep imbalance learning, and you can either choose to train from scratch, or evaluate with the best model after training. To evaluate with the best model, you can get more in-depth metrics such as per class accuracy for further evaluation on the performance of the selected strategy. We provide one trained model in [example/checkpoint_cifar10](https://github.com/ntucllab/imbalanced-DL/tree/main/example/checkpoint_cifar10).
 * For each strategy trainer, it is associated with a `config_file`, `ImbalancedDataset object`, `model`, and `strategy_name`.
-* Specifically, the `config_file` will provide some training parameters, where the default settings for reproducing benchmark result can be found in [example/config](). You can also set these training parameters based on your own need.
+* Specifically, the `config_file` will provide some training parameters, where the default settings for reproducing benchmark result can be found in [example/config](https://github.com/ntucllab/imbalanced-DL/tree/main/example/config). You can also set these training parameters based on your own need.
 * For `model`, we currently provide `resnet32` and `resnet18` for reproducing the benchmark results.
 * We provide a `build_trainer()` function to return the specified trainer as the following.
 
@@ -106,7 +106,7 @@ trainer.do_train_val()
 trainer.eval_best_model()
 
 ```
-* To construct your own strategy trainer, you need to inherit from [`Trainer`]() class, where in your own strategy you will have to implement `get_criterion()` and `train_one_epoch()` method. After this you can choose whether to add your strategy to `build_trainer()` function or you can just use it as the above demonstration.
+* To construct your own strategy trainer, you need to inherit from [`Trainer`](https://github.com/ntucllab/imbalanced-DL/blob/e63acaab958bf206edad9418e9c30352e9566356/imbalanceddl/strategy/trainer.py#L11) class, where in your own strategy you will have to implement `get_criterion()` and `train_one_epoch()` method. After this you can choose whether to add your strategy to `build_trainer()` function or you can just use it as the above demonstration.
 
 
 (2) Benchmark research environment:
@@ -118,10 +118,10 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar10.yaml --strategy ERM
 
 ```
 * Following the example code, you can not only get results from baseline training as well as state-of-the-art performance such as [LDAM](https://arxiv.org/pdf/1906.07413.pdf) or [Remix](https://arxiv.org/pdf/2007.03943.pdf), but also use this environment to develop your own algorithm / strategy. Feel free to add your own strategy into this package.
-* For more information about example and usage, please see the [Example README]()
+* For more information about example and usage, please see the [Example README](https://github.com/ntucllab/imbalanced-DL/tree/main/example)
 
 ## Benchmark Results
-We provide benchmark results on 5 image datasets, including **CIFAR-10**, **CIFAR-100**, **CINIC-10**, **SVHN**, and **Tiny-ImageNet**. We follow standard procedure to generate imbalanced training dataset for these 5 datasets, and provide their top 1 validation accuracy results for research benchmark. For example, below you can see the result table of **Long-tailed Imbalanced CIFAR-10** trained on different strategies. For more detailed benchmark results, please see [example/README.md]().
+We provide benchmark results on 5 image datasets, including **CIFAR-10**, **CIFAR-100**, **CINIC-10**, **SVHN**, and **Tiny-ImageNet**. We follow standard procedure to generate imbalanced training dataset for these 5 datasets, and provide their top 1 validation accuracy results for research benchmark. For example, below you can see the result table of **Long-tailed Imbalanced CIFAR-10** trained on different strategies. For more detailed benchmark results, please see [example/README.md](https://github.com/ntucllab/imbalanced-DL/tree/main/example).
 
 * `Long-tailed Imbalanced CIFAR-10`
 
