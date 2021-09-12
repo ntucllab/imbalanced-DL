@@ -22,6 +22,8 @@ weight_decay: 2e-4
 # Remix hyper parameter
 k_majority: 3
 tau: 0.5
+# MAMix hyper parameter
+mamix_ratio: -0.25
 # logging related
 print_freq: 10
 root_log: 'log_cifar10'

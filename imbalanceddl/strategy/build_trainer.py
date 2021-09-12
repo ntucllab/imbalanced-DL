@@ -1,5 +1,6 @@
 from imbalanceddl.strategy import MixupTrainer
 from imbalanceddl.strategy import RemixTrainer
+from imbalanceddl.strategy import MAMixTrainer
 from imbalanceddl.strategy import ERMTrainer
 from imbalanceddl.strategy import DRWTrainer
 from imbalanceddl.strategy import LDAMDRWTrainer
@@ -19,6 +20,12 @@ def build_trainer(cfg, imbalance_dataset, model=None, strategy=None):
     elif strategy == 'Remix_DRW':
         print("=> Remix Trainer !")
         trainer = RemixTrainer(cfg,
+                               imbalance_dataset,
+                               model=model,
+                               strategy=strategy)
+    elif strategy == 'MAMix_DRW':
+        print("=> MAMix Trainer !")
+        trainer = MAMixTrainer(cfg,
                                imbalance_dataset,
                                model=model,
                                strategy=strategy)

@@ -40,7 +40,7 @@ def get_args():
                         type=str,
                         choices=[
                             'ERM', 'DRW', 'LDAM_DRW', 'Mixup_DRW', 'Remix_DRW',
-                            'Reweight_CB'
+                            'Reweight_CB', 'MAMix_DRW'
                         ],
                         help='select strategy for trainer')
     parser.add_argument('--learning_rate',

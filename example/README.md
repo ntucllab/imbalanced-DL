@@ -45,6 +45,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar10.yaml --best_model .
 |[`LDAM_DRW`](https://arxiv.org/pdf/1906.07413.pdf)| Label Distribution Aware Margin Loss with DRW|
 |[`Mixup_DRW`](https://github.com/facebookresearch/mixup-cifar10)| Mixup with DRW|
 |[`Remix_DRW`](https://arxiv.org/pdf/2007.03943.pdf)| Remix with DRW|
+|[`MAMix_DRW`]()| MAMix with DRW|
 
 ### Dataset supported
 * We provide some common image datasets for research benchmark.
@@ -91,6 +92,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar10.yaml --strategy [St
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 77.75            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 82.11            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 81.82            |
+|long-tailed | 100        | ResNet32  | MAMix-DRW| 82.29            |
 
 
 ### CIFAR-100
@@ -111,6 +113,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar100.yaml --strategy [S
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 41.28            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 46.91            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 46.00            |
+|long-tailed | 100        | ResNet32  | MAMix-DRW| 46.93            |
 
 
 ### CINIC-10
@@ -131,6 +134,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cinic10.yaml --strategy [St
 |long-tailed | 100        | ResNet18  | LDAM-DRW | 68.15            |
 |long-tailed | 100        | ResNet18  | Mixup-DRW| 71.40            |
 |long-tailed | 100        | ResNet18  | Remix-DRW| 71.15            |
+|long-tailed | 100        | ResNet18  | MAMix-DRW| 71.76            |
 
 
 ### SVHN
@@ -151,6 +155,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_svhn10.yaml --strategy [Str
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 83.48            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 85.19            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 84.52            |
+|long-tailed | 100        | ResNet32  | MAMix-DRW| 85.41            |
 
 
 ### Tiny-ImageNet
@@ -171,6 +176,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_tiny200.yaml --strategy [St
 |long-tailed | 100        | ResNet18  | LDAM-DRW | 31.90            |
 |long-tailed | 100        | ResNet18  | Mixup-DRW| 37.97            |
 |long-tailed | 100        | ResNet18  | Remix-DRW| 36.89            |
+|long-tailed | 100        | ResNet18  | MAMix-DRW| 37.73            |
 
 
 ## Acknowledgement

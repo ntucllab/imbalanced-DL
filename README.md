@@ -13,6 +13,7 @@ We provide some baseline strategies as well as some state-of-the-are strategies 
 * [Label Distribution Aware Margin (LDAM) Loss with DRW](https://arxiv.org/pdf/1906.07413.pdf)
 * [Mixup with DRW](https://arxiv.org/pdf/1710.09412.pdf)
 * [Remix with DRW](https://arxiv.org/pdf/2007.03943.pdf)
+* [MAMix with DRW (Link Coming Soon)]()
 
 
 ## Environments
@@ -132,6 +133,7 @@ We provide benchmark results on 5 image datasets, including **CIFAR-10**, **CIFA
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 77.75            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 82.11            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 81.82            |
+|long-tailed | 100        | ResNet32  | MAMix-DRW| 82.29            |
 
 
 ## Test

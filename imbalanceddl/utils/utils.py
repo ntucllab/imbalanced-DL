@@ -75,6 +75,14 @@ def prepare_store_name(args):
             str(args.epochs),
             str(args.seed)
         ])
+    elif args.strategy == 'MAMix_DRW':
+        args.store_name = '_'.join([
+            args.dataset, args.imb_type,
+            str(args.imb_factor), args.strategy,
+            str(args.mamix_ratio),
+            str(args.epochs),
+            str(args.seed)
+        ])
     else:
         args.store_name = '_'.join([
             args.dataset, args.imb_type,
@@ -108,10 +116,11 @@ def collect_result(args, output_best):
     print("[Recording] {}".format(fname))
     with open(fname, "a") as f:
         f.write(
-            "Seed = {} | Dataset = {} | Strategy = {} | Init Lr = {} | Epoch = {} | ImbType = {} | ImbFactor = {} | Best acc = {} \n"
+            "Seed = {} | Dataset = {} | Strategy = {} | Init Lr = {} | Epoch = {} | ImbType = {} | ImbFactor = {} | MAMix Ratio = {} | Best acc = {} \n"
             .format(
                 args.seed, args.dataset, args.strategy, args.lr, args.epochs,
                 args.imb_type, str(args.imb_factor),
+                str(args.mamix_ratio) if args.strategy == 'MAMix_DRW' else 'None',
                 output_best))
 
 
