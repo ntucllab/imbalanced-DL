@@ -41,8 +41,9 @@ git clone https://github.com/ntucllab/imbalanced-DL.git
 cd imbalanceddl
 python -m pip install -r requirements.txt
 python setup.py install
-
 ```
+### Note
+* If you would like to further develop your own algorithm within this package, or modifying existing files, please remember to build again locally with `python setup.py install` so that the change will be updated in the package.
 
 ## Usage
 We highlight three key features of `imbalanced-DL` as the following:
