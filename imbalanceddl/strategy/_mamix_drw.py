@@ -3,8 +3,8 @@ import torch
 import torch.nn as nn
 from .trainer import Trainer
 
-from libdeep.utils.utils import AverageMeter
-from libdeep.utils.metrics import accuracy
+from imbalanceddl.utils.utils import AverageMeter
+from imbalanceddl.utils.metrics import accuracy
 
 
 def get_k(n1, n2, f):
