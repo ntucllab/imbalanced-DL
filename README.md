@@ -44,6 +44,7 @@ python setup.py install
 ```
 ### Note
 * If you would like to further develop your own algorithm within this package, or modifying existing files, please remember to build again locally with `python setup.py install` so that the change will be updated in the package.
+* Please also note that by default, `CIFAR10`, `CIFAR100`, and `SVHN` are defaulted available when you are using PyTorch, you can experiment with these three basic datasets first, and if you would like to further test your algorithm on larger images, you can follow the instruction in the `/example/README.md` for further downloading information for `CINIC10` and `Tiny-ImageNet`.
 
 ## Usage
 We highlight three key features of `imbalanced-DL` as the following:
