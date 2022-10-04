@@ -1,12 +1,13 @@
 import os
 import torch
 import torch.optim as optim
-
+import numpy as np
 from imbalanceddl.utils.utils import AverageMeter, save_checkpoint, collect_result
 from imbalanceddl.utils.metrics import accuracy
-
 from .base import BaseTrainer
-
+from imbalanceddl.utils.m2m_utils import Logger
+from torchmetrics import F1Score
+from torchmetrics.functional import precision_recall
 
 class Trainer(BaseTrainer):
     def __init__(self, *args, **kwargs):
@@ -25,7 +26,24 @@ class Trainer(BaseTrainer):
             print("=> Strategy = {}".format(self.strategy))
         self.optimizer = self._init_optimizer()
         self.cls_num_list = self.cfg.cls_num_list
+        self.img_num_per_cls = self.cfg.cls_num_list
         self.best_acc1 = 0.
+        self.best_val_acc1 = 0.
+
+        if self.cfg.strategy == "M2m":
+            LOGFILE_BASE = f"S{self.cfg.seed}_{self.cfg.strategy}_" \
+                f"L{self.cfg.lam}_W{self.cfg.warm}_" \
+                f"E{self.cfg.step_size}_I{self.cfg.attack_iter}_" \
+                f"{self.cfg.dataset}_R{int(1/self.cfg.imb_factor)}_{self.cfg.backbone}_G{self.cfg.gamma}_B{self.cfg.beta}"
+                
+            LOGNAME = 'Imbalance_' + LOGFILE_BASE
+            self.logger = Logger(LOGNAME)
+            self.LOGDIR = self.logger.logdir
+            self.LOG_CSV = os.path.join(self.LOGDIR, f'log_{self.cfg.seed}.csv')
+            self.LOG_CSV_HEADER = [
+                'epoch', 'train loss', 'gen loss', 'train acc', 'gen_acc', 'prob_orig', 'prob_targ',
+                'test loss', 'major test acc', 'neutral test acc', 'minor test acc', 'test acc', 'f1 score'
+            ]
 
     def get_criterion(self):
         return NotImplemented
@@ -68,12 +86,45 @@ class Trainer(BaseTrainer):
                 lr = self.cfg.learning_rate * 0.1
             else:
                 lr = self.cfg.learning_rate
+        # total 400 epochs scheme for testing phase -> should be removed then
+        elif self.cfg.epochs == 400:
+            epoch = self.epoch + 1
+            if epoch <=5:
+                lr = self.cfg.learning_rate * epoch / 5
+            elif epoch > 320:
+                lr = self.cfg.learning_rate * 0.01
+            elif epoch > 250:
+                lr = self.cfg.learning_rate * 0.1
+            else:
+                lr = self.cfg.learning_rate
         else:
             raise ValueError(
                 "[Warning] Total epochs {} not supported !".format(
                     self.cfg.epochs))
         for param_group in self.optimizer.param_groups:
             param_group['lr'] = lr
+    
+    # Do and train M2m Strategy here
+    def do_train_val_m2m(self):
+        # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device = self.cfg.gpu
+        self.logger.log('==> Building model: %s' % self.cfg.backbone)
+        net = self.model
+        net_seed = self.model
+        # net = models.__dict__[self.cfg.backbone](self.cfg.num_classes)
+        # net_seed = models.__dict__[self.cfg.backbone](self.cfg.num_classes)
+
+        net, net_seed = net.to(device), net_seed.to(device)
+        optimizer = optim.SGD(net.parameters(), lr=self.cfg.learning_rate, momentum=self.cfg.momentum, weight_decay=self.cfg.weight_decay)
+        
+        SUCCESS = torch.zeros(self.cfg.epochs, self.cfg.num_classes, 2)
+        self.train_oversamples = []
+
+        if self.cfg.over:
+            # Stage 2: Train f model with synthetic dataset.
+            for epoch in range(self.cfg.start_epoch, self.cfg.epochs):
+                self.epoch = epoch
+                self.train_one_epoch(net, net_seed, optimizer, SUCCESS)
 
     def do_train_val(self):
         for epoch in range(self.cfg.start_epoch, self.cfg.epochs):
@@ -108,7 +159,7 @@ class Trainer(BaseTrainer):
                     'classifier': self.cfg.classifier,
                     'state_dict': self.model.state_dict(),
                     'best_acc1': self.best_acc1,
-                    'optimizer': self.optimizer.state_dict(),
+                    'optimizer': self.optimizer.state_dict()
                 }, is_best, self.epoch)
 
     def eval_best_model(self):
@@ -148,11 +199,17 @@ class Trainer(BaseTrainer):
         losses = AverageMeter('Loss', ':.4e')
         top1 = AverageMeter('Acc@1', ':6.2f')
         top5 = AverageMeter('Acc@5', ':6.2f')
+        f1 = F1Score(num_classes=self.cfg.num_classes).to(self.cfg.gpu)
 
         # switch to evaluate mode
         self.model.eval()
+
         all_preds = list()
         all_targets = list()
+        all_f1_scores = []
+
+        all_precisions = []
+        all_recalls = []
 
         with torch.no_grad():
             for i, (_input, target) in enumerate(self.val_loader):
@@ -162,6 +219,7 @@ class Trainer(BaseTrainer):
 
                 # compute output
                 output, _ = self.model(_input)
+                # output = self.model(_input)
                 loss = self.criterion(output, target).mean()
 
                 # measure accuracy and record loss
@@ -171,14 +229,21 @@ class Trainer(BaseTrainer):
                 top5.update(acc5[0], _input.size(0))
 
                 _, pred = torch.max(output, 1)
+                F1_value = f1(pred, target)
+                precision_value, recall_value = precision_recall(pred, target, average='macro', num_classes=self.cfg.num_classes)
+
                 all_preds.extend(pred.cpu().numpy())
                 all_targets.extend(target.cpu().numpy())
+                all_f1_scores.append(F1_value.cpu().numpy())
+                all_precisions.append(precision_value.cpu().numpy())
+                all_recalls.append(recall_value.cpu().numpy())
 
                 if i % self.cfg.print_freq == 0:
-                    output = ('Test: [{0}/{1}]\t'
+                    output = ('Epoch: [{0}][{1}/{2}]\t'
                               'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                               'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
                               'Prec@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
+                                  self.epoch,
                                   i,
                                   len(self.val_loader),
                                   loss=losses,
@@ -192,6 +257,17 @@ class Trainer(BaseTrainer):
                                             top1,
                                             top5,
                                             flag='Testing')
+
+            all_f1_scores = np.array(all_f1_scores)
+            f1=np.mean(all_f1_scores)
+            print("==========F1_Score of TESTING dataset: {:.4f}% =============".format(f1*100))
+
+            all_precisions = np.array(all_precisions)
+            all_recalls = np.array(all_recalls)
+            precision =np.mean(all_precisions)
+            recall =np.mean(all_recalls)
+            f1_precision_recall = 2*precision*recall / (precision + recall)
+            print("==========F1_Mixed_by_Ha of TESTING dataset: {:.4f}% =============".format(f1_precision_recall*100))
 
         if cls_acc_string is not None:
             return top1.avg, cls_acc_string

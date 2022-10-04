@@ -142,8 +142,9 @@ class ImbalancedDataset:
     def _cinic10(self):
         print("=> Preparing IMBALANCECINIC100 {} | {} !".format(
             self.imb_type, self.imb_factor))
-        # Change to your path
-        cinic_root = "/tmp2/wccheng/cinic/"
+        # Change to your path into configuration file
+        # cinic_root = "/tmp2/wccheng/cinic/"
+        cinic_root = self.cfg.cinic_root
         train_dataset = IMBALANCECINIC10(
             cinic_root + "train",
             imb_type=self.imb_type,
@@ -160,8 +161,9 @@ class ImbalancedDataset:
     def _tiny200(self):
         print("=> Preparing IMBALANCETINY {} | {} !".format(
             self.imb_type, self.imb_factor))
-        # Change to your path
-        tiny_root = "/tmp2/wccheng/tiny/tiny-imagenet-200/"
+        # Change to your path into configuration file
+        # tiny_root = "/tmp2/wccheng/tiny/tiny-imagenet-200/"
+        tiny_root = self.cfg.tiny_root
         train_dataset = IMBALANCETINY(tiny_root + "train",
                                       imb_type=self.imb_type,
                                       imb_factor=self.imb_factor,
