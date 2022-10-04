@@ -329,11 +329,10 @@ class M2mTrainer(Trainer):
         torch.save(state, ckpt_path)
     
     def load_best_first_200_epochs(self, net, net_seed, optimizer):
-        # ckpt_g = f'./checkpoint/{DATASET}/ratio{ARGS.ratio}/erm_trial1_{MODEL}.t7'
         LOGFILE_BASE = f"S{self.cfg.seed}_{self.cfg.strategy}_" \
         f"L{self.cfg.lam}_W{self.cfg.warm}_" \
         f"E{self.cfg.step_size}_I{self.cfg.attack_iter}_" \
-        f"{self.cfg.dataset}_R{self.cfg.ratio}_{self.cfg.backbone}_G{self.cfg.gamma}_B{self.cfg.beta}"
+        f"{self.cfg.dataset}_R{int(1/self.cfg.imb_factor)}_{self.cfg.backbone}_G{self.cfg.gamma}_B{self.cfg.beta}"
         LOGNAME = 'Imbalance_' + LOGFILE_BASE
         ckpt_name = 'ckpt_' + str(self.cfg.strategy) + '_' + str(self.cfg.seed) + '_' + str(self.cfg.dataset) + '.t7'
         ckpt_g = f'./logs/{LOGNAME}/{ckpt_name}'
