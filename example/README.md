@@ -112,7 +112,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar100.yaml --strategy [S
 |:----------:|:----------:|:---------:|:--------:|:----------------:|
 |long-tailed | 100        | ResNet32  | ERM      | 38.46            |
 |long-tailed | 100        | ResNet32  | DRW      | 40.40            |
-|long-tailed | 100        | ResNet32  | M2m      | 39.39            |
+|long-tailed | 100        | ResNet32  | M2m      | 41.92            |
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 41.28            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 46.91            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 46.00            |
