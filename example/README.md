@@ -17,7 +17,7 @@ python main.py --gpu 0 --seed 1126 --config config/config_cifar10.yaml --strateg
 |  Parameter | Description|
 |:----------:|:----------:|
 | `--config` | Path to config file (specify by different dataset)|
-|`--strategy`| `ERM`, `DRW`, `LDAM_DRW`, `Mixup_DRW`, `Remix_DRW`|
+|`--strategy`| `ERM`, `DRW`, `M2m`, `LDAM_DRW`, `Mixup_DRW`, `Remix_DRW`|
 |`--seed`    | Recommend to use seed training|
 
 * The best result will be around 71% validation accuracy.
@@ -42,6 +42,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar10.yaml --best_model .
 |:--------:|:----------:|
 |  `ERM`   |Baseline Training|
 |[`DRW`](https://arxiv.org/pdf/1906.07413.pdf)| Deferred Re-Weighting|
+|[`M2m`](https://arxiv.org/pdf/2004.00431.pdf)| Major-to-minor translation|
 |[`LDAM_DRW`](https://arxiv.org/pdf/1906.07413.pdf)| Label Distribution Aware Margin Loss with DRW|
 |[`Mixup_DRW`](https://github.com/facebookresearch/mixup-cifar10)| Mixup with DRW|
 |[`Remix_DRW`](https://arxiv.org/pdf/2007.03943.pdf)| Remix with DRW|
@@ -89,6 +90,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar10.yaml --strategy [St
 |:----------:|:----------:|:---------:|:--------:|:----------------:|
 |long-tailed | 100        | ResNet32  | ERM      | 71.23            |
 |long-tailed | 100        | ResNet32  | DRW      | 75.08            |
+|long-tailed | 100        | ResNet32  | M2m      | 76.15            |
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 77.75            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 82.11            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 81.82            |
@@ -110,6 +112,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar100.yaml --strategy [S
 |:----------:|:----------:|:---------:|:--------:|:----------------:|
 |long-tailed | 100        | ResNet32  | ERM      | 38.46            |
 |long-tailed | 100        | ResNet32  | DRW      | 40.40            |
+|long-tailed | 100        | ResNet32  | M2m      | 39.39            |
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 41.28            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 46.91            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 46.00            |
@@ -131,6 +134,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cinic10.yaml --strategy [St
 |:----------:|:----------:|:---------:|:--------:|:----------------:|
 |long-tailed | 100        | ResNet18  | ERM      | 61.08            |
 |long-tailed | 100        | ResNet18  | DRW      | 63.75            |
+|long-tailed | 100        | ResNet18  | M2m      | 64.20            |
 |long-tailed | 100        | ResNet18  | LDAM-DRW | 68.15            |
 |long-tailed | 100        | ResNet18  | Mixup-DRW| 71.40            |
 |long-tailed | 100        | ResNet18  | Remix-DRW| 71.15            |
@@ -152,6 +156,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_svhn10.yaml --strategy [Str
 |:----------:|:----------:|:---------:|:--------:|:----------------:|
 |long-tailed | 100        | ResNet32  | ERM      | 79.91            |
 |long-tailed | 100        | ResNet32  | DRW      | 80.68            |
+|long-tailed | 100        | ResNet32  | M2m      | 77.68            |
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 83.48            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 85.19            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 84.52            |
@@ -173,6 +178,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_tiny200.yaml --strategy [St
 |:----------:|:----------:|:---------:|:--------:|:----------------:|
 |long-tailed | 100        | ResNet18  | ERM      | 32.86            |
 |long-tailed | 100        | ResNet18  | DRW      | 33.81            |
+|long-tailed | 100        | ResNet18  | M2m      | 34.33            |
 |long-tailed | 100        | ResNet18  | LDAM-DRW | 31.90            |
 |long-tailed | 100        | ResNet18  | Mixup-DRW| 37.97            |
 |long-tailed | 100        | ResNet18  | Remix-DRW| 36.89            |

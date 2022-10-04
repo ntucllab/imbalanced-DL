@@ -58,7 +58,7 @@ class IMBALANCECINIC10(torchvision.datasets.ImageFolder, BaseDataset):
 
 if __name__ == '__main__':
     # modify to your path
-    cinic_root = "/tmp2/wccheng/cinic/"
+    cinic_root = "/tmp2/maitanha/cinic/"
     transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))

@@ -5,6 +5,8 @@ from imbalanceddl.strategy import ERMTrainer
 from imbalanceddl.strategy import DRWTrainer
 from imbalanceddl.strategy import LDAMDRWTrainer
 from imbalanceddl.strategy import ReweightCBTrainer
+from imbalanceddl.strategy import M2mTrainer
+from imbalanceddl.strategy import DeepSMOTETrainer
 
 
 def build_trainer(cfg, imbalance_dataset, model=None, strategy=None):
@@ -17,6 +19,19 @@ def build_trainer(cfg, imbalance_dataset, model=None, strategy=None):
                                imbalance_dataset,
                                model=model,
                                strategy=strategy)
+    elif strategy == 'M2m':
+        print("=> M2m Trainer !")
+        trainer = M2mTrainer(cfg,
+                               imbalance_dataset,
+                               model=model,
+                               strategy=strategy)
+
+    elif strategy == 'Deep_SMOTE':
+        print("=> Deep_SMOTE Trainer !")
+        trainer = DeepSMOTETrainer(cfg,
+                               imbalance_dataset,
+                               model=model,
+                               strategy=strategy)                                    
     elif strategy == 'Remix_DRW':
         print("=> Remix Trainer !")
         trainer = RemixTrainer(cfg,

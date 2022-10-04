@@ -10,6 +10,7 @@ We provide some baseline strategies as well as some state-of-the-are strategies 
 * Empirical Risk Minimization (baseline strategy)
 * [Reweighting with Class Balance (CB) Loss](https://arxiv.org/pdf/1901.05555.pdf)
 * [Deferred Re-Weighting (DRW)](https://arxiv.org/pdf/1906.07413.pdf)
+* [M2m: Major-to-minor translation](https://arxiv.org/pdf/2004.00431.pdf)
 * [Label Distribution Aware Margin (LDAM) Loss with DRW](https://arxiv.org/pdf/1906.07413.pdf)
 * [Mixup with DRW](https://arxiv.org/pdf/1710.09412.pdf)
 * [Remix with DRW](https://arxiv.org/pdf/2007.03943.pdf)
@@ -132,6 +133,7 @@ We provide benchmark results on 5 image datasets, including **CIFAR-10**, **CIFA
 |:----------:|:----------:|:---------:|:--------:|:----------------:|
 |long-tailed | 100        | ResNet32  | ERM      | 71.23            |
 |long-tailed | 100        | ResNet32  | DRW      | 75.08            |
+|long-tailed | 100        | ResNet32  | M2m      | 76.15            |
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 77.75            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 82.11            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 81.82            |
@@ -143,8 +145,11 @@ We provide benchmark results on 5 image datasets, including **CIFAR-10**, **CIFA
 
 
 ## Contact
-If you have any question, please don't hesitate to email `wccheng3011@gmail.com`. Thanks !
+If you have any question, please don't hesitate to email `wccheng3011@gmail.com` or `maitanhaksdtvt6@gmail.com`. Thanks !
 
 
 ## Acknowledgement
 The authors thank members of the Computational Learning Lab at National Taiwan University for valuable discussions and various contributions to making this package better.
+
+## Notice for Tiny200 dataset.
+You might face the issue with validation dataset of Tiny200 when you reproduce on this dataset, because the structure of validate dataset is not well-organized yet. Therefore, you need to preprocess the validation dataset of it by running the `make.py` file to reorganize it before training. You need to copy the `make.py` to `tiny/val/` folder and then just run this file.

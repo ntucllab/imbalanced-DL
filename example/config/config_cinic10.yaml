@@ -28,3 +28,18 @@ mamix_ratio: -0.25
 print_freq: 10
 root_log: 'log_cinic10'
 root_model: 'checkpoint_cinic10'
+# M2m hyper parameter
+warm: 160
+# reweight: True
+beta: 0.9999
+num_classes: 10
+# loss_type: 'CE' # choices=['CE', 'Focal', 'LDAM']
+attack_iter: 10
+step_size: 0.1
+lam: 0.5
+gamma: 0.9
+ratio: 100
+eff_beta: 1
+over: True
+imb_start: 5
+cinic_root : './maitanha/cinic/'

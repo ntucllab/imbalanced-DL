@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import shutil
 import os
-
+import torch
 
 def fix_all_seed(seed):
     """
@@ -83,6 +83,14 @@ def prepare_store_name(args):
             str(args.epochs),
             str(args.seed)
         ])
+    elif args.strategy == 'M2m_DRW':
+        args.store_name = '_'.join([
+            args.dataset, args.imb_type,
+            str(args.imb_factor), args.strategy,
+            str(args.loss_type),
+            str(args.epochs),
+            str(args.seed)
+        ])
     else:
         args.store_name = '_'.join([
             args.dataset, args.imb_type,
@@ -122,7 +130,6 @@ def collect_result(args, output_best):
                 args.imb_type, str(args.imb_factor),
                 str(args.mamix_ratio) if args.strategy == 'MAMix_DRW' else 'None',
                 output_best))
-
 
 class AverageMeter(object):
     def __init__(self, name, fmt=':f'):

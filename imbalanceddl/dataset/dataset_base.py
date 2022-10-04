@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class BaseDataset:
     """Base Dataset (Mixin)
 
