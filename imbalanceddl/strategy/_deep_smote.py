@@ -4,7 +4,7 @@ import torch.nn as nn
 from .trainer import Trainer
 from imbalanceddl.utils.utils import AverageMeter
 from imbalanceddl.utils.metrics import accuracy
-from imbalanceddl.utils.deep_smote_data_loader import *
+from imbalanceddl.utils.deep_smote_data_loader import get_balanced_deep_smote
 from torchmetrics import F1Score
 from torchmetrics.functional import precision_recall
 
@@ -98,22 +98,21 @@ class DeepSMOTETrainer(Trainer):
         
         all_f1_scores = np.array(all_f1_scores)
         f1=np.mean(all_f1_scores)
-        print("==========F1_Score of training dataset: {:.4f}% =============".format(f1*100))
+        print("-----------F1_Score of training dataset: {:.4f}% ------------".format(f1*100))
 
         all_precisions = np.array(all_precisions)
         all_recalls = np.array(all_recalls)
         precision =np.mean(all_precisions)
         recall =np.mean(all_recalls)
         f1_precision_recall = 2*precision*recall / (precision + recall)
-        print("==========F1_Mixed_by_Ha of training dataset: {:.4f}% =============".format(f1_precision_recall*100))
+        print("----------F1_Mixed_by_Ha of training dataset: {:.4f}% ----------".format(f1_precision_recall*100))
 
     def train_one_epoch(self):
-        
         # import pdb
         # pdb.set_trace()
         if self.epoch == self.cfg.warm:
-            print("=========Applying over sampling with Deep SMOTE===========")
-            train_loader2 = get_balanced_deep_smote(self.cfg.dataset, self.cfg.batch_size, num_workers=8)
+            print("----------Applying over sampling with Deep SMOTE-------------")
+            train_loader2 = get_balanced_deep_smote(self.cfg.dataset, self.cfg.batch_size, self.cfg.imb_type, self.cfg.imb_factor, num_workers=8)
             self.train_loader = train_loader2
 
         ## Training ( ARGS.warm is used for deferred re-balancing ) ##
