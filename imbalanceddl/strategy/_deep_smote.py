@@ -36,8 +36,8 @@ class DeepSMOTETrainer(Trainer):
         all_targets = list()
         all_f1_scores = []
 
-        all_precisions = []
-        all_recalls = []
+        # all_precisions = []
+        # all_recalls = []
 
         # switch to train mode
         self.model.train()
@@ -61,8 +61,8 @@ class DeepSMOTETrainer(Trainer):
             all_preds.extend(pred.cpu().numpy())
             all_targets.extend(target.cpu().numpy())
             all_f1_scores.append(F1_value.cpu().numpy())
-            all_precisions.append(precision_value.cpu().numpy())
-            all_recalls.append(recall_value.cpu().numpy())
+            # all_precisions.append(precision_value.cpu().numpy())
+            # all_recalls.append(recall_value.cpu().numpy())
 
             # measure accuracy and record loss
             losses.update(loss.item(), _input.size(0))
@@ -100,12 +100,12 @@ class DeepSMOTETrainer(Trainer):
         f1=np.mean(all_f1_scores)
         print("-----------F1_Score of training dataset: {:.4f}% ------------".format(f1*100))
 
-        all_precisions = np.array(all_precisions)
-        all_recalls = np.array(all_recalls)
-        precision =np.mean(all_precisions)
-        recall =np.mean(all_recalls)
-        f1_precision_recall = 2*precision*recall / (precision + recall)
-        print("----------F1_Mixed_by_Ha of training dataset: {:.4f}% ----------".format(f1_precision_recall*100))
+        # all_precisions = np.array(all_precisions)
+        # all_recalls = np.array(all_recalls)
+        # precision =np.mean(all_precisions)
+        # recall =np.mean(all_recalls)
+        # f1_precision_recall = 2*precision*recall / (precision + recall)
+        # print("----------F1_Mixed_by_Ha of training dataset: {:.4f}% ----------".format(f1_precision_recall*100))
 
     def train_one_epoch(self):
         # import pdb
