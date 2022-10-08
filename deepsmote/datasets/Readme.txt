@@ -1,0 +1,1 @@
+This folder is to storage the dataset downloaded when you run Deepsmote Generative Method
