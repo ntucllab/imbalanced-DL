@@ -17,7 +17,7 @@ python main.py --gpu 0 --seed 1126 --config config/config_cifar10.yaml --strateg
 |  Parameter | Description|
 |:----------:|:----------:|
 | `--config` | Path to config file (specify by different dataset)|
-|`--strategy`| `ERM`, `DRW`, `M2m`, `Deep_SMOTE`, `LDAM_DRW`, `Mixup_DRW`, `Remix_DRW`|
+|`--strategy`| `ERM`, `DRW`, `M2m`, `DeepSMOTE`, `LDAM_DRW`, `Mixup_DRW`, `Remix_DRW`|
 |`--seed`    | Recommend to use seed training|
 
 * The best result will be around 71% validation accuracy.
@@ -43,7 +43,7 @@ python main.py --gpu 0 --seed 1126 --c config/config_cifar10.yaml --best_model .
 |  `ERM`   |Baseline Training|
 |[`DRW`](https://arxiv.org/pdf/1906.07413.pdf)| Deferred Re-Weighting|
 |[`M2m`](https://arxiv.org/pdf/2004.00431.pdf)| Major-to-minor translation|
-|[`Deep_SMOTE`](https://arxiv.org/pdf/2105.02340.pdf)| DeepSMOTE: Fusing Deep Learning and SMOTE for Imbalanced Data|
+|[`DeepSMOTE`](https://arxiv.org/pdf/2105.02340.pdf)| DeepSMOTE: Fusing Deep Learning and SMOTE for Imbalanced Data|
 |[`LDAM_DRW`](https://arxiv.org/pdf/1906.07413.pdf)| Label Distribution Aware Margin Loss with DRW|
 |[`Mixup_DRW`](https://github.com/facebookresearch/mixup-cifar10)| Mixup with DRW|
 |[`Remix_DRW`](https://arxiv.org/pdf/2007.03943.pdf)| Remix with DRW|
