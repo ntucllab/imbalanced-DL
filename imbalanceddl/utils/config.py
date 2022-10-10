@@ -19,7 +19,7 @@ def get_args():
     parser.add_argument('--imb_type', default="exp", type=str, choices=['exp', 'step'], help='imbalance type')
     parser.add_argument('--imb_factor', default=0.01, type=float, help='imbalance factor')
     # Strategy
-    parser.add_argument('--strategy', default="ERM", type=str,  choices=['ERM', 'DRW', 'LDAM_DRW', 'Mixup_DRW', 'Remix_DRW','Reweight_CB', 'MAMix_DRW', 'M2m', 'Deep_SMOTE'
+    parser.add_argument('--strategy', default="ERM", type=str,  choices=['ERM', 'DRW', 'LDAM_DRW', 'Mixup_DRW', 'Remix_DRW','Reweight_CB', 'MAMix_DRW', 'M2m', 'DeepSMOTE'
                         ], help='select strategy for trainer')
     parser.add_argument('--learning_rate', default=0.1, type=float, metavar='LR', help='initial learning rate', dest='lr')
     parser.add_argument('--momentum', default=0.9, type=float, metavar='M', help='momentum')

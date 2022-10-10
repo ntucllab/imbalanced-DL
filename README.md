@@ -12,6 +12,7 @@ We provide some baseline strategies as well as some state-of-the-are strategies 
 * [Deferred Re-Weighting (DRW)](https://arxiv.org/pdf/1906.07413.pdf)
 * [M2m: Major-to-minor translation](https://arxiv.org/pdf/2004.00431.pdf)
 * [Label Distribution Aware Margin (LDAM) Loss with DRW](https://arxiv.org/pdf/1906.07413.pdf)
+* [DeepSMOTE: Fusing Deep Learning and SMOTE for Imbalanced Data](https://arxiv.org/pdf/2105.02340.pdf)
 * [Mixup with DRW](https://arxiv.org/pdf/1710.09412.pdf)
 * [Remix with DRW](https://arxiv.org/pdf/2007.03943.pdf)
 * [MAMix with DRW (Link Coming Soon)]()
@@ -134,6 +135,7 @@ We provide benchmark results on 5 image datasets, including **CIFAR-10**, **CIFA
 |long-tailed | 100        | ResNet32  | ERM      | 71.23            |
 |long-tailed | 100        | ResNet32  | DRW      | 75.08            |
 |long-tailed | 100        | ResNet32  | M2m      | 76.15            |
+|long-tailed | 100        | ResNet32  | DeepSMOTE| 76.66            |
 |long-tailed | 100        | ResNet32  | LDAM-DRW | 77.75            |
 |long-tailed | 100        | ResNet32  | Mixup-DRW| 82.11            |
 |long-tailed | 100        | ResNet32  | Remix-DRW| 81.82            |

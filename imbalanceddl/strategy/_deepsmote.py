@@ -14,7 +14,7 @@ class DeepSMOTETrainer(Trainer):
         super().__init__(*args, **kwargs)
 
     def get_criterion(self):
-        if self.strategy == 'Deep_SMOTE':
+        if self.strategy == 'DeepSMOTE':
             per_cls_weights = None
             print("=> CE Loss with Per Class Weight = {}".format(
                 per_cls_weights))
