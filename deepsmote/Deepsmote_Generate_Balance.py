@@ -167,8 +167,11 @@ def generatesamples(args, dec_x, dec_y, class_num, img_num_per_cls):
     encf.append(enc)
     decf.append(dec)
 
-    #generate some images 
+    #generate some images
+    #In case, you does not have enough memory for generating DeepSMOTE synthetic data on GPU with large datasets (tiny-ImageNet, cinic,...)
+    #you can change "device = 'cpu'"  --> using cpu to generate data since cpu has more memory rather than gpu.
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    #device = 'cpu'
 
     path_enc = encf[0]
     path_dec = decf[0]
