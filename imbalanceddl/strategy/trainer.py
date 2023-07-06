@@ -262,13 +262,6 @@ class Trainer(BaseTrainer):
             f1=np.mean(all_f1_scores)
             print("==========F1_Score of TESTING dataset: {:.4f}% =============".format(f1*100))
 
-            all_precisions = np.array(all_precisions)
-            all_recalls = np.array(all_recalls)
-            precision =np.mean(all_precisions)
-            recall =np.mean(all_recalls)
-            f1_precision_recall = 2*precision*recall / (precision + recall)
-            print("==========F1_Mixed_by_Ha of TESTING dataset: {:.4f}% =============".format(f1_precision_recall*100))
-
         if cls_acc_string is not None:
             return top1.avg, cls_acc_string
         else:
