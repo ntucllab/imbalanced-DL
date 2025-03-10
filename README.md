@@ -15,7 +15,7 @@ We provide some baseline strategies as well as some state-of-the-are strategies 
 * [DeepSMOTE: Fusing Deep Learning and SMOTE for Imbalanced Data](https://arxiv.org/pdf/2105.02340.pdf)
 * [Mixup with DRW](https://arxiv.org/pdf/1710.09412.pdf)
 * [Remix with DRW](https://arxiv.org/pdf/2007.03943.pdf)
-* [MAMix with DRW](https://www.csie.ntu.edu.tw/~htlin/paper/doc/taai23mamix.pdf)
+* [MAMix with DRW](https://www.csie.ntu.edu.tw/~htlin/paper/doc/taai23mamix.pdf) (Ours)
 
 
 ## Environments
