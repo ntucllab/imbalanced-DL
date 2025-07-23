@@ -149,6 +149,24 @@ We provide benchmark results on 5 image datasets, including **CIFAR-10**, **CIFA
 ## Contact
 If you have any question, please don't hesitate to email `wccheng3011@gmail.com` or `maitanhaksdtvt6@gmail.com`. Thanks !
 
+## Citing
+
+If you find this package useful, please cite both the original works associated with each strategy and the following:
+```
+@InProceedings{MaMixup2024,
+author="Cheng, Wei-Chao
+and Mai, Tan-Ha
+and Lin, Hsuan-Tien",
+title="From SMOTE to Mixup for Deep Imbalanced Classification",
+booktitle="Technologies and Applications of Artificial Intelligence",
+year="2024",
+publisher="Springer Nature Singapore",
+address="Singapore",
+pages="75--96",
+isbn="978-981-97-1711-8"
+}
+```
+
 
 ## Acknowledgement
 The authors thank members of the Computational Learning Lab at National Taiwan University for valuable discussions and various contributions to making this package better.
